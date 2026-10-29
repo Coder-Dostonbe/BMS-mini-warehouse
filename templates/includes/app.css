@@ -86,7 +86,8 @@ input:focus, select:focus, textarea:focus, .btn:focus-visible { outline: 3px sol
 .alert-info, .alert-warning { background: var(--info-bg); color: #1b3f7a; border-color: #c4d7f3; }
 
 .searchbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 16px; }
-.searchbar input, .searchbar select { flex: 1 1 200px; width: auto; }
+.searchbar input, .searchbar select { flex: 1 1 200px; width: auto; min-width: 0; }
+select { max-width: 100%; text-overflow: ellipsis; }
 
 table.data { width: 100%; border-collapse: collapse; background: var(--card); border: 1px solid var(--line); }
 .data th, .data td { padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
@@ -113,13 +114,17 @@ dl.details dd { margin: 0; }
 
 @media (max-width: 600px) {
   .container { padding: 12px; }
+  .topbar { padding: 8px 12px; }
+  .who { width: 100%; order: -1; }
   .data thead { display: none; }
   table.data, .data tbody, .data tr, .data td { display: block; width: 100%; }
   table.data { border: 0; background: transparent; }
   .data tr { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); margin: 0 0 10px; padding: 2px 0; }
-  .data td { display: flex; justify-content: space-between; gap: 12px; text-align: right; border-bottom: 1px solid #edf0f4; overflow-wrap: anywhere; }
+  .data td { display: flex; justify-content: space-between; gap: 12px; padding: 7px 12px; text-align: right; border-bottom: 1px solid #edf0f4; overflow-wrap: anywhere; }
   .data td:last-child { border-bottom: 0; }
   .data td::before { content: attr(data-label); flex: 0 0 38%; text-align: left; font-weight: 600; color: var(--muted); }
+  .data td:first-child { justify-content: flex-start; text-align: left; font-weight: 600; padding-top: 10px; }
+  .data td:first-child::before { content: none; }
   .data td.num { white-space: normal; }
   .data td.no-label::before { content: none; }
   .data td.no-label { justify-content: flex-end; }

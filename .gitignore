@@ -11,5 +11,6 @@ db.sqlite3-*
 data/
 .coverage
 htmlcov/
+.claude/
 .idea/
 .vscode/

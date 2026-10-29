@@ -150,3 +150,8 @@ class HistoryFilterForm(forms.Form):
         required=False,
         choices=[("", gettext_lazy("Все операции")), *OperationType.choices],
     )
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs["aria-label"] = field.label

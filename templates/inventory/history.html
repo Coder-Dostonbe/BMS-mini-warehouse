@@ -31,7 +31,7 @@
     {% if event.kind == "cancel" %}
     <tr>
       <td data-label="{% translate 'Дата' %}">{{ event.at|date:"d.m.Y H:i" }}</td>
-      <td data-label="{% translate 'Событие' %}"><span class="badge badge-cancel">{% translate "Отмена" %}</span> {{ op.get_type_display|lower }} #{{ op.pk }}</td>
+      <td data-label="{% translate 'Событие' %}"><span><span class="badge badge-cancel">{% translate "Отмена" %}</span> {{ op.get_type_display|lower }} #{{ op.pk }}</span></td>
       <td data-label="{% translate 'Товар' %}">{{ op.product.name }}</td>
       <td class="num" data-label="{% translate 'Количество' %}">{{ op.quantity|qty:op.product.unit }}</td>
       <td data-label="{% translate 'Объект' %}">{{ op.object_name|default:"—" }}</td>
@@ -42,10 +42,10 @@
     {% else %}
     <tr{% if op.is_cancelled %} class="is-cancelled"{% endif %}>
       <td data-label="{% translate 'Дата' %}">{{ event.at|date:"d.m.Y H:i" }}</td>
-      <td data-label="{% translate 'Событие' %}">
+      <td data-label="{% translate 'Событие' %}"><span>
         <span class="badge {% if op.type == 'in' %}badge-in{% else %}badge-out{% endif %}">{{ op.get_type_display }}</span> #{{ op.pk }}
-        {% if op.is_cancelled %}<div class="badge badge-cancel">{% blocktranslate trimmed with user=op.cancelled_by.get_username when=op.cancelled_at|date:"d.m.Y H:i" %}отменено: {{ user }}, {{ when }}{% endblocktranslate %}</div>{% endif %}
-      </td>
+        {% if op.is_cancelled %}<span class="badge badge-cancel">{% blocktranslate trimmed with user=op.cancelled_by.get_username when=op.cancelled_at|date:"d.m.Y H:i" %}отменено: {{ user }}, {{ when }}{% endblocktranslate %}</span>{% endif %}
+      </span></td>
       <td data-label="{% translate 'Товар' %}">{{ op.product.name }}</td>
       <td class="num" data-label="{% translate 'Количество' %}">{{ op.quantity|qty:op.product.unit }}</td>
       <td data-label="{% translate 'Объект' %}">{{ op.object_name|default:"—" }}</td>
