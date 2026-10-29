@@ -1,0 +1,14 @@
+services:
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-}
+    volumes:
+      - sklad-data:/data   # db.sqlite3 and .secret_key survive rebuilds
+    restart: unless-stopped
+
+volumes:
+  sklad-data:

@@ -1,0 +1,12 @@
+venv/
+.venv/
+.git/
+.claude/
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.sqlite3-*
+db.sqlite3*
+.secret_key
+.env
+data/
