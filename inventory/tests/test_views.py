@@ -187,6 +187,18 @@ class No500Tests(TestCase):
                 self.assertEqual(response.status_code, status)
         self.assertEqual(Operation.objects.count(), 1)
 
+    def test_unexpected_error_shows_the_human_500_page(self):
+        from unittest import mock
+
+        client = self.client_class(raise_request_exception=False)
+        client.force_login(demo_user("director"))
+        with mock.patch("inventory.views.stock_report", side_effect=RuntimeError("boom")):
+            response = client.get(reverse("inventory:stock"))
+        self.assertEqual(response.status_code, 500)
+        self.assertContains(response, "Что-то пошло не так", status_code=500)
+        self.assertNotContains(response, "boom", status_code=500)
+        self.assertNotContains(response, "Traceback", status_code=500)
+
     def test_custom_404_page(self):
         response = self.client.get("/no-such-page/")
         self.assertContains(response, "Страница не найдена", status_code=404)
