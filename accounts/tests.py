@@ -50,6 +50,42 @@ class LoginTests(TestCase):
             self.post_login("director", "wrong")
         self.assertEqual(self.post_login("director", "Director2026!").status_code, 302)
 
+    def test_username_case_and_stray_spaces_are_forgiven(self):
+        for username, password in [
+            ("Director", "Director2026!"),
+            ("DIRECTOR", "Director2026!"),
+            ("  director  ", "Director2026!"),
+            ("director", "Director2026! "),
+            ("director", " Director2026!\t"),
+            ("StoreKeeper", "Store2026!"),
+        ]:
+            with self.subTest(username=username, password=password):
+                client = Client()
+                response = client.post(reverse("login"), {"username": username, "password": password})
+                self.assertRedirects(response, reverse("inventory:stock"))
+                self.assertEqual(client.session["_auth_user_id"], str(get_user_model().objects.get(username=username.strip().lower()).pk))
+
+    def test_password_stays_case_sensitive(self):
+        for password in ["director2026!", "DIRECTOR2026!", "Director2026"]:
+            with self.subTest(password=password):
+                self.assertContains(self.post_login("director", password), "Неверный логин или пароль")
+
+    def test_case_variants_share_one_attempt_counter(self):
+        for username in ["Director", "DIRECTOR", "director", "dIrEcToR", " Director "]:
+            self.post_login(username, "wrong")
+        self.assertContains(self.post_login("director", "Director2026!"), "Слишком много неудачных попыток")
+
+    def test_exact_name_wins_when_two_users_differ_only_by_case(self):
+        User = get_user_model()
+        User.objects.create_user("ali", password="lower-pass-1", role="manager")
+        User.objects.create_user("Ali", password="upper-pass-1", role="manager")
+        for username, password in [("ali", "lower-pass-1"), ("Ali", "upper-pass-1")]:
+            with self.subTest(username=username):
+                client = Client()
+                self.assertEqual(client.post(reverse("login"), {"username": username, "password": password}).status_code, 302)
+                self.assertEqual(client.session["_auth_user_id"], str(User.objects.get(username=username).pk))
+        self.assertContains(self.post_login("ALI", "lower-pass-1"), "Неверный логин или пароль")
+
     def test_next_only_redirects_inside_the_site(self):
         for target, expected in [
             ("/history/", "/history/"),

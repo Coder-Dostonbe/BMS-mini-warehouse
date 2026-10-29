@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, get_user_model, login, logout
 from django.shortcuts import redirect, render, resolve_url
 from django.utils.http import url_has_allowed_host_and_scheme
 from django.utils.translation import gettext as _
@@ -20,6 +20,25 @@ def _safe_next(request) -> str:
     return ""
 
 
+def _canonical_username(typed: str) -> str:
+    """Case-insensitive login name; an exact match wins if two names differ only by case."""
+    matches = list(
+        get_user_model().objects.filter(username__iexact=typed).values_list("username", flat=True)[:2]
+    )
+    if typed in matches or len(matches) != 1:
+        return typed
+    return matches[0]
+
+
+def _authenticate(request, username: str, password: str):
+    # Passwords stay case-sensitive; stray spaces at the ends (copy-paste) are forgiven.
+    username = _canonical_username(username)
+    user = authenticate(request, username=username, password=password)
+    if user is None and password.strip() != password:
+        user = authenticate(request, username=username, password=password.strip())
+    return user
+
+
 @sensitive_post_parameters("password")
 @never_cache
 @require_http_methods(["GET", "POST"])
@@ -36,9 +55,7 @@ def login_view(request):
         if throttle.is_blocked(username, ip):
             error = _("Слишком много неудачных попыток. Повторите через 5 минут.")
         else:
-            user = authenticate(
-                request, username=username, password=form.cleaned_data["password"]
-            )
+            user = _authenticate(request, username, form.cleaned_data["password"])
             if user is None:
                 throttle.register_failure(username, ip)
                 error = _("Неверный логин или пароль")
