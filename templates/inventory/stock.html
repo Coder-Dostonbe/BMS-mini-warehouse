@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% load i18n inventory_tags %}
+{% block title %}{% translate "Остатки" %}{% endblock %}
+{% block content %}
+<h1>{% if report.archived %}{% translate "Архив товаров" %}{% else %}{% translate "Остатки" %}{% endif %}</h1>
+
+<div class="actions">
+  {% if can.move_stock %}
+    <a class="btn" href="{% url 'inventory:receive' %}">{% translate "Приход" %}</a>
+    <a class="btn" href="{% url 'inventory:issue' %}">{% translate "Выдача" %}</a>
+  {% endif %}
+  {% if can.export_stock %}
+    <a class="btn btn-secondary" href="{% url 'inventory:export' %}{% if export_query %}?{{ export_query }}{% endif %}">Excel</a>
+  {% endif %}
+  {% if can.manage_products %}
+    {% if report.archived %}
+      <a class="btn btn-secondary" href="{% url 'inventory:stock' %}">{% translate "Активные товары" %}</a>
+    {% else %}
+      <a class="btn btn-secondary" href="{% url 'inventory:stock' %}?archived=1">{% translate "Архив" %}</a>
+    {% endif %}
+  {% endif %}
+</div>
+
+<form class="searchbar" method="get" role="search">
+  <input type="search" name="q" value="{{ report.query }}" maxlength="200"
+         placeholder="{% translate 'Поиск по названию' %}" aria-label="{% translate 'Поиск по названию' %}">
+  {% if report.archived %}<input type="hidden" name="archived" value="1">{% endif %}
+  <button class="btn" type="submit">{% translate "Найти" %}</button>
+  {% if report.query %}
+    <a class="btn btn-secondary" href="{% url 'inventory:stock' %}{% if report.archived %}?archived=1{% endif %}">{% translate "Сбросить" %}</a>
+  {% endif %}
+</form>
+
+{% if report.rows %}
+<table class="data">
+  <thead>
+    <tr>
+      <th>{% translate "Товар" %}</th>
+      <th>{% translate "Ед." %}</th>
+      <th class="num">{% translate "Остаток" %}</th>
+      {% if report.with_prices %}
+        <th class="num">{% translate "Цена" %}</th>
+        <th class="num">{% translate "Сумма" %}</th>
+      {% endif %}
+    </tr>
+  </thead>
+  <tbody>
+  {% for row in report.rows %}
+    <tr>
+      <td data-label="{% translate 'Товар' %}">{{ row.name }}</td>
+      <td data-label="{% translate 'Ед.' %}">{{ row.unit|unit_label }}</td>
+      <td class="num" data-label="{% translate 'Остаток' %}">{{ row.stock|qty:row.unit }}</td>
+      {% if report.with_prices %}
+        <td class="num" data-label="{% translate 'Цена' %}">{{ row.price|money:row.currency }}</td>
+        <td class="num" data-label="{% translate 'Сумма' %}">{{ row.amount|money:row.currency }}</td>
+      {% endif %}
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% if report.with_prices and totals_text %}
+  <div class="totals">{% translate "Итого" %}: {{ totals_text }}</div>
+{% endif %}
+{% else %}
+  <div class="empty">
+    {% if report.query %}{% translate "Ничего не найдено." %}{% elif report.archived %}{% translate "В архиве пусто." %}{% else %}{% translate "Товаров пока нет." %}{% endif %}
+  </div>
+{% endif %}
+{% endblock %}

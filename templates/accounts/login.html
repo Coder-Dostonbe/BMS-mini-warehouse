@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Вход" %}{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>{% translate "Вход" %}</h1>
+  {% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+  <form class="stack" method="post" action="{% url 'login' %}" data-once novalidate>
+    {% csrf_token %}
+    {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+    {% include "includes/field.html" with field=form.username %}
+    {% include "includes/field.html" with field=form.password %}
+    <div><button class="btn" type="submit">{% translate "Войти" %}</button></div>
+  </form>
+</div>
+{% endblock %}

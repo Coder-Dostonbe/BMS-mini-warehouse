@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Некорректный запрос" %}{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>{% translate "Некорректный запрос" %}</h1>
+  <p>{% translate "Сервер не смог обработать запрос. Обновите страницу и попробуйте ещё раз." %}</p>
+  <p><a class="btn" href="{% url 'inventory:stock' %}">{% translate "На главную" %}</a></p>
+</div>
+{% endblock %}

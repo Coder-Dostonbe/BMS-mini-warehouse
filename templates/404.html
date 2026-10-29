@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Страница не найдена" %}{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>{% translate "Страница не найдена" %}</h1>
+  <p>{% translate "Такой страницы или записи нет. Возможно, ссылка устарела." %}</p>
+  <p><a class="btn" href="{% url 'inventory:stock' %}">{% translate "На главную" %}</a></p>
+</div>
+{% endblock %}

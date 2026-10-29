@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% if product %}{% translate "Изменить товар" %}{% else %}{% translate "Новый товар" %}{% endif %}{% endblock %}
+{% block content %}
+<h1>{% if product %}{% translate "Изменить товар" %}{% else %}{% translate "Новый товар" %}{% endif %}</h1>
+<div class="card narrow">
+  {% include "includes/form_errors.html" %}
+  <form class="stack" method="post" data-once novalidate>
+    {% csrf_token %}
+    {% include "includes/field.html" with field=form.name %}
+    {% include "includes/field.html" with field=form.unit %}
+    {% include "includes/field.html" with field=form.price %}
+    {% include "includes/field.html" with field=form.currency %}
+    <div class="actions">
+      <button class="btn" type="submit">{% translate "Сохранить" %}</button>
+      <a class="btn btn-secondary" href="{% url 'inventory:products' %}">{% translate "Назад" %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

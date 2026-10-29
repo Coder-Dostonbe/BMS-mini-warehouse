@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<h1>{{ title }}</h1>
+<div class="card narrow">
+  {% include "includes/form_errors.html" %}
+  <form class="stack" method="post" data-once novalidate>
+    {% csrf_token %}
+    <input type="hidden" name="idempotency_key" value="{{ form_key }}">
+    {% include "includes/field.html" with field=form.product %}
+    {% include "includes/field.html" with field=form.quantity hint_id="quantity-hint" %}
+    {% if is_issue %}{% include "includes/field.html" with field=form.object_name %}{% endif %}
+    {% include "includes/field.html" with field=form.comment %}
+    <div class="actions">
+      <button class="btn" type="submit">{% translate "Сохранить" %}</button>
+      <a class="btn btn-secondary" href="{% url 'inventory:stock' %}">{% translate "Назад" %}</a>
+    </div>
+  </form>
+</div>
+{% endblock %}

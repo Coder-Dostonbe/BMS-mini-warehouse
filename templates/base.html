@@ -1,0 +1,50 @@
+{% load i18n %}<!doctype html>
+{% get_current_language as LANG %}
+<html lang="{{ LANG }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}{% endblock %} — {% translate "Мини-склад" %}</title>
+  <style>{% include "includes/app.css" %}</style>
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="{% url 'inventory:stock' %}">{% translate "Мини-склад" %}</a>
+  {% if request %}
+  <div class="tools">
+    <form class="inline" method="post" action="{% url 'set_language' %}">
+      {% csrf_token %}
+      <input type="hidden" name="next" value="{{ request.get_full_path }}">
+      <button class="btn btn-secondary" type="submit" name="language" value="ru" aria-pressed="{% if LANG == 'ru' %}true{% else %}false{% endif %}">RU</button>
+      <button class="btn btn-secondary" type="submit" name="language" value="uz" aria-pressed="{% if LANG == 'uz' %}true{% else %}false{% endif %}">UZ</button>
+    </form>
+    {% if user.is_authenticated %}
+      <span class="who">{{ user.get_username }} · {{ user.get_role_display|default:"—" }}</span>
+      <form class="inline" method="post" action="{% url 'logout' %}">
+        {% csrf_token %}
+        <button class="btn btn-secondary" type="submit">{% translate "Выйти" %}</button>
+      </form>
+    {% endif %}
+  </div>
+  {% if user.is_authenticated %}
+  <nav class="nav" aria-label="{% translate 'Меню' %}">
+    {% with section=request.resolver_match.url_name %}
+    {% if can.view_stock %}<a href="{% url 'inventory:stock' %}"{% if section == 'stock' %} aria-current="page"{% endif %}>{% translate "Остатки" %}</a>{% endif %}
+    {% if can.move_stock %}<a href="{% url 'inventory:receive' %}"{% if section == 'receive' %} aria-current="page"{% endif %}>{% translate "Приход" %}</a>
+    <a href="{% url 'inventory:issue' %}"{% if section == 'issue' %} aria-current="page"{% endif %}>{% translate "Выдача" %}</a>{% endif %}
+    {% if can.manage_products %}<a href="{% url 'inventory:products' %}"{% if section == 'products' or section == 'product_create' or section == 'product_edit' %} aria-current="page"{% endif %}>{% translate "Товары" %}</a>{% endif %}
+    {% if can.view_history %}<a href="{% url 'inventory:history' %}"{% if section == 'history' or section == 'cancel' %} aria-current="page"{% endif %}>{% translate "История" %}</a>{% endif %}
+    {% endwith %}
+  </nav>
+  {% endif %}
+  {% endif %}
+</header>
+<main class="container">
+  {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="status">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<script>{% include "includes/app.js" %}</script>
+</body>
+</html>

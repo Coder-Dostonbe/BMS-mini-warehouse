@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load i18n inventory_tags %}
+{% block title %}{% translate "Отмена операции" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Отмена операции" %}</h1>
+<div class="card narrow">
+  {% if error %}<div class="alert alert-error" role="alert">{{ error }}</div>{% endif %}
+  <dl class="details">
+    <dt>{% translate "Операция" %}</dt><dd>{{ op.get_type_display }} #{{ op.pk }}</dd>
+    <dt>{% translate "Товар" %}</dt><dd>{{ op.product.name }}</dd>
+    <dt>{% translate "Количество" %}</dt><dd>{{ op.quantity|qty:op.product.unit }}</dd>
+    {% if op.object_name %}<dt>{% translate "Объект" %}</dt><dd>{{ op.object_name }}</dd>{% endif %}
+    {% if op.comment %}<dt>{% translate "Комментарий" %}</dt><dd>{{ op.comment }}</dd>{% endif %}
+    <dt>{% translate "Создал" %}</dt><dd>{{ op.created_by.get_username }}, {{ op.created_at|date:"d.m.Y H:i" }}</dd>
+    <dt>{% translate "На складе сейчас" %}</dt><dd>{{ op.product.stock|qty:op.product.unit }}</dd>
+  </dl>
+  {% if op.is_cancelled %}
+    <div class="alert alert-info">{% blocktranslate trimmed with user=op.cancelled_by.get_username when=op.cancelled_at|date:"d.m.Y H:i" %}Операция уже отменена ({{ user }}, {{ when }}){% endblocktranslate %}</div>
+    <a class="btn btn-secondary" href="{% url 'inventory:history' %}">{% translate "К истории" %}</a>
+  {% else %}
+    <p>{% if op.type == "in" %}{% translate "Остаток уменьшится на количество прихода." %}{% else %}{% translate "Выданное количество вернётся на склад." %}{% endif %}</p>
+    <form method="post" data-once data-confirm="{% translate 'Точно отменить операцию?' %}">
+      {% csrf_token %}
+      <div class="actions">
+        <button class="btn btn-danger" type="submit">{% translate "Отменить операцию" %}</button>
+        <a class="btn btn-secondary" href="{% url 'inventory:history' %}">{% translate "Назад" %}</a>
+      </div>
+    </form>
+  {% endif %}
+</div>
+{% endblock %}

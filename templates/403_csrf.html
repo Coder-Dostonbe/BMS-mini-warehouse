@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate "Сессия устарела" %}{% endblock %}
+{% block content %}
+<div class="card narrow">
+  <h1>{% translate "Сессия устарела" %}</h1>
+  <p>{% translate "Форма была открыта слишком давно или cookies отключены. Обновите страницу и повторите действие." %}</p>
+  <p><a class="btn" href="{% url 'inventory:stock' %}">{% translate "На главную" %}</a></p>
+</div>
+{% endblock %}

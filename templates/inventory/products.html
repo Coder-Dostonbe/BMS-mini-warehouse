@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+{% load i18n inventory_tags %}
+{% block title %}{% translate "Товары" %}{% endblock %}
+{% block content %}
+<h1>{% translate "Товары" %}</h1>
+<div class="actions">
+  <a class="btn" href="{% url 'inventory:product_create' %}">{% translate "Добавить товар" %}</a>
+</div>
+
+{% if products %}
+<table class="data">
+  <thead>
+    <tr>
+      <th>{% translate "Название" %}</th>
+      <th>{% translate "Ед." %}</th>
+      <th class="num">{% translate "Цена" %}</th>
+      <th class="num">{% translate "Остаток" %}</th>
+      <th>{% translate "Статус" %}</th>
+      <th class="num">{% translate "Действия" %}</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for product in products %}
+    <tr>
+      <td data-label="{% translate 'Название' %}">{{ product.name }}</td>
+      <td data-label="{% translate 'Ед.' %}">{{ product.unit|unit_label }}</td>
+      <td class="num" data-label="{% translate 'Цена' %}">{{ product.price|money:product.currency }}</td>
+      <td class="num" data-label="{% translate 'Остаток' %}">{{ product.stock|qty:product.unit }}</td>
+      <td data-label="{% translate 'Статус' %}">{% if product.is_archived %}<span class="badge">{% translate "В архиве" %}</span>{% else %}<span class="badge badge-in">{% translate "Активен" %}</span>{% endif %}</td>
+      <td class="no-label">
+        <div class="row-actions">
+          <a class="btn btn-secondary" href="{% url 'inventory:product_edit' product.pk %}">{% translate "Изменить" %}</a>
+          {% if product.is_archived %}
+            <form class="inline" method="post" action="{% url 'inventory:product_restore' product.pk %}" data-once>
+              {% csrf_token %}<button class="btn btn-secondary" type="submit">{% translate "Вернуть" %}</button>
+            </form>
+          {% else %}
+            <form class="inline" method="post" action="{% url 'inventory:product_archive' product.pk %}" data-once
+                  data-confirm="{% translate 'Отправить товар в архив?' %}">
+              {% csrf_token %}<button class="btn btn-secondary" type="submit">{% translate "В архив" %}</button>
+            </form>
+          {% endif %}
+          {% if not product.has_operations %}
+            <form class="inline" method="post" action="{% url 'inventory:product_delete' product.pk %}" data-once
+                  data-confirm="{% translate 'Удалить товар без возможности восстановления?' %}">
+              {% csrf_token %}<button class="btn btn-danger" type="submit">{% translate "Удалить" %}</button>
+            </form>
+          {% endif %}
+        </div>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% else %}
+  <div class="empty">{% translate "Товаров пока нет." %}</div>
+{% endif %}
+{% endblock %}
