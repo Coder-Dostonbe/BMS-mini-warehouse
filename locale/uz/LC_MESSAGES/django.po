@@ -1,0 +1,421 @@
+# Uzbek (Latin) translation of Mini-sklad. msgids are Russian (the default language).
+# Compile with: python manage.py compile_translations
+msgid ""
+msgstr ""
+"Project-Id-Version: mini-sklad\n"
+"Language: uz\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "%(name)s (в архиве)"
+msgstr "%(name)s (arxivda)"
+
+msgid "Активен"
+msgstr "Faol"
+
+msgid "Активные товары"
+msgstr "Faol tovarlar"
+
+msgid "Архив"
+msgstr "Arxiv"
+
+msgid "Архив товаров"
+msgstr "Tovarlar arxivi"
+
+msgid "В архив"
+msgstr "Arxivga"
+
+msgid "В архиве"
+msgstr "Arxivda"
+
+msgid "В архиве пусто."
+msgstr "Arxiv boʻsh."
+
+msgid "Валюта"
+msgstr "Valyuta"
+
+msgid "Введите число"
+msgstr "Son kiriting"
+
+msgid "Введите число, например 12,5"
+msgstr "Son kiriting, masalan 12,5"
+
+msgid "Вернуть"
+msgstr "Qaytarish"
+
+msgid "Войти"
+msgstr "Kirish"
+
+msgid "Все операции"
+msgstr "Barcha operatsiyalar"
+
+msgid "Все товары"
+msgstr "Barcha tovarlar"
+
+msgid "Вход"
+msgstr "Kirish"
+
+msgid "Выданное количество вернётся на склад."
+msgstr "Berilgan miqdor omborga qaytadi."
+
+msgid "Выдача"
+msgstr "Chiqim"
+
+msgid "Выдача сохранена: %(name)s — %(qty)s → %(object)s"
+msgstr "Chiqim saqlandi: %(name)s — %(qty)s → %(object)s"
+
+msgid "Выйти"
+msgstr "Chiqish"
+
+msgid "Дата"
+msgstr "Sana"
+
+msgid "Действия"
+msgstr "Amallar"
+
+msgid "Для штук количество должно быть целым"
+msgstr "Dona uchun miqdor butun son boʻlishi kerak"
+
+msgid "Добавить товар"
+msgstr "Tovar qoʻshish"
+
+msgid "Доступ запрещён"
+msgstr "Ruxsat yoʻq"
+
+msgid "Ед."
+msgstr "Birlik"
+
+msgid "Единица измерения"
+msgstr "Oʻlchov birligi"
+
+msgid "Единица: %(unit)s, на складе: %(stock)s"
+msgstr "Birlik: %(unit)s, omborda: %(stock)s"
+
+msgid "Значение должно быть больше нуля"
+msgstr "Qiymat noldan katta boʻlishi kerak"
+
+msgid "Значение не может быть отрицательным"
+msgstr "Qiymat manfiy boʻlishi mumkin emas"
+
+msgid "Изменить"
+msgstr "Tahrirlash"
+
+msgid "Изменить товар"
+msgstr "Tovarni tahrirlash"
+
+msgid "История"
+msgstr "Tarix"
+
+msgid "Итого"
+msgstr "Jami"
+
+msgid "К истории"
+msgstr "Tarixga"
+
+msgid "Кладовщик"
+msgstr "Omborchi"
+
+msgid "Количество"
+msgstr "Miqdor"
+
+msgid "Количество должно быть больше нуля"
+msgstr "Miqdor noldan katta boʻlishi kerak"
+
+msgid "Комментарий"
+msgstr "Izoh"
+
+msgid "Куда выдаётся товар: объект, бригада или заказ"
+msgstr "Tovar qayerga beriladi: obyekt, brigada yoki buyurtma"
+
+msgid "Логин"
+msgstr "Login"
+
+msgid "Менеджер"
+msgstr "Menejer"
+
+msgid "Меню"
+msgstr "Menyu"
+
+msgid "Метры (м)"
+msgstr "Metr (m)"
+
+msgid "Мини-склад"
+msgstr "Mini-ombor"
+
+msgid "Мы уже записали ошибку. Данные не потеряны: повторите действие через минуту."
+msgstr "Xatolik qayd etildi. Maʼlumotlar yoʻqolmadi: bir daqiqadan soʻng qayta urinib koʻring."
+
+msgid "На главную"
+msgstr "Bosh sahifaga"
+
+msgid "На складе сейчас"
+msgstr "Hozir omborda"
+
+msgid "На складе только %(available)s"
+msgstr "Omborda faqat %(available)s bor"
+
+msgid "Назад"
+msgstr "Orqaga"
+
+msgid "Название"
+msgstr "Nomi"
+
+msgid "Найти"
+msgstr "Qidirish"
+
+msgid "Не более %(places)s знаков после запятой"
+msgstr "Verguldan keyin koʻpi bilan %(places)s ta raqam"
+
+msgid "Неверный логин или пароль"
+msgstr "Login yoki parol notoʻgʻri"
+
+msgid "Неизвестная валюта"
+msgstr "Nomaʼlum valyuta"
+
+msgid "Неизвестная единица измерения"
+msgstr "Nomaʼlum oʻlchov birligi"
+
+msgid "Некорректная цена"
+msgstr "Narx notoʻgʻri"
+
+msgid "Некорректный запрос"
+msgstr "Notoʻgʻri soʻrov"
+
+msgid "Нельзя изменить единицу измерения: по товару уже есть операции"
+msgstr "Oʻlchov birligini oʻzgartirib boʻlmaydi: tovar boʻyicha operatsiyalar bor"
+
+msgid "Нельзя изменить: по товару уже есть операции"
+msgstr "Oʻzgartirib boʻlmaydi: tovar boʻyicha operatsiyalar bor"
+
+msgid "Нельзя отменить приход: из него уже выдано %(issued)s, на складе осталось только %(left)s"
+msgstr "Kirimni bekor qilib boʻlmaydi: undan %(issued)s allaqachon berilgan, omborda faqat %(left)s qolgan"
+
+msgid "Нельзя отправить в архив товар с остатком %(qty)s. Сначала выдайте остаток."
+msgstr "Qoldigʻi %(qty)s boʻlgan tovarni arxivga yuborib boʻlmaydi. Avval qoldiqni chiqim qiling."
+
+msgid "Нельзя удалить товар: по нему есть операции. Отправьте его в архив."
+msgstr "Tovarni oʻchirib boʻlmaydi: u boʻyicha operatsiyalar bor. Uni arxivga yuboring."
+
+msgid "Ничего не найдено."
+msgstr "Hech narsa topilmadi."
+
+msgid "Новый товар"
+msgstr "Yangi tovar"
+
+msgid "Объект"
+msgstr "Obyekt"
+
+msgid "Операций пока нет."
+msgstr "Hozircha operatsiyalar yoʻq."
+
+msgid "Операция"
+msgstr "Operatsiya"
+
+msgid "Операция не найдена"
+msgstr "Operatsiya topilmadi"
+
+msgid "Операция не сохранена: данные изменились. Обновите страницу и повторите."
+msgstr "Operatsiya saqlanmadi: maʼlumotlar oʻzgargan. Sahifani yangilab, qayta urinib koʻring."
+
+msgid "Операция отменена: %(type)s — %(name)s — %(qty)s"
+msgstr "Operatsiya bekor qilindi: %(type)s — %(name)s — %(qty)s"
+
+msgid "Операция уже отменена (%(user)s, %(when)s)"
+msgstr "Operatsiya allaqachon bekor qilingan (%(user)s, %(when)s)"
+
+msgid "Операция уже сохранена: %(name)s — %(qty)s"
+msgstr "Operatsiya allaqachon saqlangan: %(name)s — %(qty)s"
+
+msgid "Остатки"
+msgstr "Qoldiqlar"
+
+msgid "Остаток"
+msgstr "Qoldiq"
+
+msgid "Остаток изменился во время операции. Повторите."
+msgstr "Operatsiya vaqtida qoldiq oʻzgardi. Qayta urinib koʻring."
+
+msgid "Остаток не может стать отрицательным"
+msgstr "Qoldiq manfiy boʻlishi mumkin emas"
+
+msgid "Остаток уменьшится на количество прихода."
+msgstr "Qoldiq kirim miqdoriga kamayadi."
+
+msgid "Отмена"
+msgstr "Bekor qilish"
+
+msgid "Отмена операции"
+msgstr "Operatsiyani bekor qilish"
+
+msgid "Отменить"
+msgstr "Bekor qilish"
+
+msgid "Отменить операцию"
+msgstr "Operatsiyani bekor qilish"
+
+msgid "Отправить товар в архив?"
+msgstr "Tovar arxivga yuborilsinmi?"
+
+msgid "Пароль"
+msgstr "Parol"
+
+msgid "Поиск по названию"
+msgstr "Nomi boʻyicha qidirish"
+
+msgid "Показать"
+msgstr "Koʻrsatish"
+
+msgid "Пользователь"
+msgstr "Foydalanuvchi"
+
+msgid "Превышен максимально допустимый остаток"
+msgstr "Ruxsat etilgan eng katta qoldiqdan oshib ketdi"
+
+msgid "Приход"
+msgstr "Kirim"
+
+msgid "Приход сохранён: %(name)s — %(qty)s"
+msgstr "Kirim saqlandi: %(name)s — %(qty)s"
+
+msgid "Руководитель"
+msgstr "Rahbar"
+
+msgid "Сбросить"
+msgstr "Tozalash"
+
+msgid "Сервер не смог обработать запрос. Обновите страницу и попробуйте ещё раз."
+msgstr "Server soʻrovni qayta ishlay olmadi. Sahifani yangilab, yana urinib koʻring."
+
+msgid "Сессия устарела"
+msgstr "Sessiya eskirgan"
+
+msgid "Слишком большое значение, максимум %(max)s"
+msgstr "Qiymat juda katta, eng koʻpi %(max)s"
+
+msgid "Слишком большое количество"
+msgstr "Miqdor juda katta"
+
+msgid "Слишком длинное число"
+msgstr "Son juda uzun"
+
+msgid "Слишком длинный текст: не более %(max)s символов"
+msgstr "Matn juda uzun: koʻpi bilan %(max)s ta belgi"
+
+msgid "Слишком много неудачных попыток. Повторите через 5 минут."
+msgstr "Muvaffaqiyatsiz urinishlar juda koʻp. 5 daqiqadan soʻng qayta urinib koʻring."
+
+msgid "Событие"
+msgstr "Hodisa"
+
+msgid "Создал"
+msgstr "Yaratgan"
+
+msgid "Сохранить"
+msgstr "Saqlash"
+
+msgid "Статус"
+msgstr "Holat"
+
+msgid "Страница %(number)s из %(total)s"
+msgstr "%(total)s sahifadan %(number)s-sahifa"
+
+msgid "Страница не найдена"
+msgstr "Sahifa topilmadi"
+
+msgid "Страницы"
+msgstr "Sahifalar"
+
+msgid "Сумма"
+msgstr "Summa"
+
+msgid "Такой страницы или записи нет. Возможно, ссылка устарела."
+msgstr "Bunday sahifa yoki yozuv yoʻq. Havola eskirgan boʻlishi mumkin."
+
+msgid "Тип"
+msgstr "Turi"
+
+msgid "Товар"
+msgstr "Tovar"
+
+msgid "Товар «%(name)s» в архиве"
+msgstr "«%(name)s» tovari arxivda"
+
+msgid "Товар возвращён из архива: %(name)s"
+msgstr "Tovar arxivdan qaytarildi: %(name)s"
+
+msgid "Товар добавлен: %(name)s"
+msgstr "Tovar qoʻshildi: %(name)s"
+
+msgid "Товар не найден"
+msgstr "Tovar topilmadi"
+
+msgid "Товар отправлен в архив: %(name)s"
+msgstr "Tovar arxivga yuborildi: %(name)s"
+
+msgid "Товар с таким названием уже есть"
+msgstr "Bunday nomli tovar allaqachon bor"
+
+msgid "Товар сохранён: %(name)s"
+msgstr "Tovar saqlandi: %(name)s"
+
+msgid "Товар удалён: %(name)s"
+msgstr "Tovar oʻchirildi: %(name)s"
+
+msgid "Товаров пока нет."
+msgstr "Hozircha tovarlar yoʻq."
+
+msgid "Товары"
+msgstr "Tovarlar"
+
+msgid "Точно отменить операцию?"
+msgstr "Operatsiya rostdan ham bekor qilinsinmi?"
+
+msgid "У вашей роли нет прав на это действие. Если это ошибка, обратитесь к руководителю."
+msgstr "Sizning rolingizda bu amal uchun ruxsat yoʻq. Agar bu xato boʻlsa, rahbarga murojaat qiling."
+
+msgid "Удалить"
+msgstr "Oʻchirish"
+
+msgid "Удалить товар без возможности восстановления?"
+msgstr "Tovar qayta tiklab boʻlmaydigan tarzda oʻchirilsinmi?"
+
+msgid "Укажите название"
+msgstr "Nomini kiriting"
+
+msgid "Укажите объект"
+msgstr "Obyektni kiriting"
+
+msgid "Форма была открыта слишком давно или cookies отключены. Обновите страницу и повторите действие."
+msgstr "Forma juda uzoq vaqt ochiq turgan yoki cookie oʻchirilgan. Sahifani yangilab, amalni takrorlang."
+
+msgid "Форма устарела. Обновите страницу и повторите."
+msgstr "Forma eskirgan. Sahifani yangilab, qayta urinib koʻring."
+
+msgid "Цена"
+msgstr "Narx"
+
+msgid "Цена за единицу"
+msgstr "Birlik narxi"
+
+msgid "Что-то пошло не так"
+msgstr "Nimadir notoʻgʻri ketdi"
+
+msgid "Штуки (шт)"
+msgstr "Dona"
+
+msgid "м"
+msgstr "m"
+
+msgid "отменено: %(user)s, %(when)s"
+msgstr "bekor qilingan: %(user)s, %(when)s"
+
+msgid "сум"
+msgstr "soʻm"
+
+msgid "шт"
+msgstr "dona"
+
+msgid "— выберите товар —"
+msgstr "— tovarni tanlang —"

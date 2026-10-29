@@ -127,7 +127,7 @@ AUTH_PASSWORD_VALIDATORS = [
 CACHES = {"default": {"BACKEND": "django.core.cache.backends.locmem.LocMemCache"}}
 
 LANGUAGE_CODE = "ru"
-LANGUAGES = [("ru", "Русский"), ("uz", "O‘zbekcha")]
+LANGUAGES = [("ru", "Русский"), ("uz", "Oʻzbekcha")]
 LOCALE_PATHS = [BASE_DIR / "locale"]
 TIME_ZONE = "Asia/Tashkent"
 USE_I18N = True
